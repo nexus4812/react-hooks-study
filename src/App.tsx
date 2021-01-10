@@ -1,33 +1,18 @@
-import React, {useState, useEffect} from 'react';
+import React, { ReactElement, useReducer,} from 'react';
+import Container from 'react-bootstrap/Container';
 
+import reducer from "./reducers";
+import EventForm from "./components/EventForm";
+import EventList from "./components/EventList";
 
-type State = {
-    price: number,
-    name: string
-}
-
-function App() {
-    const initialState: State = {
-        price: 0,
-        name: ''
-    };
-
-    const [state, setState] = useState(initialState);
-
-    const increment = (): void => setState({...state, price: state.price + 1});
-    const decrement = (): void => setState({...state, price: state.price - 1});
-    const changeName = (event : React.BaseSyntheticEvent): void => setState({...state, name: event.target.value});
+function App(): ReactElement {
+    const [state, dispatch] = useReducer(reducer, []);
 
     return (
-        <div className="App">
-            <div>
-                <p>Counter {state.price}</p>
-                <p>{state.name}</p>
-                <input type="text" onChange={changeName}/>
-                <button onClick={increment}> + 1</button>
-                <button onClick={decrement}> - 1</button>
-            </div>
-        </div>
+        <Container>
+            <EventForm state={state} dispatch={dispatch}/>
+            <EventList state={state} dispatch={dispatch}/>
+        </Container>
     );
 }
 
