@@ -2,15 +2,12 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Table from "react-bootstrap/Table";
 import Button from "react-bootstrap/Button";
-import React, {Dispatch} from "react";
-import {eventAction, eventItem} from "../reducers";
+import React, {useContext} from "react";
+import {AppContext} from "../context/AppContenxt";
 
-type props = {
-    state: eventItem[],
-    dispatch: Dispatch<eventAction>
-}
+export default function EventList() {
+    const {state, dispatch} = useContext(AppContext);
 
-export default function EventList({state, dispatch}: props) {
     const deleteTitle = (id: number): void => {
         dispatch({
             type: "DELETE_TYPE",

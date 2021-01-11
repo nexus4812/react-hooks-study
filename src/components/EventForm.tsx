@@ -1,16 +1,12 @@
-import {eventAction, eventItem} from "../reducers";
-import React, {Dispatch, ReactElement, useState} from "react";
+import React, { ReactElement, useContext,useState} from "react";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import {Form} from "react-bootstrap";
 import Button from "react-bootstrap/Button";
+import {AppContext} from "../context/AppContenxt";
 
-type props = {
-    state: eventItem[],
-    dispatch: Dispatch<eventAction>
-}
-
-export default function EventForm({state, dispatch}: props): ReactElement {
+export default function EventForm(): ReactElement {
+    const {state, dispatch} = useContext(AppContext);
 
     const [title, setTitle] = useState('');
     const changeTitle = (e: React.ChangeEvent<HTMLInputElement>): void => {
